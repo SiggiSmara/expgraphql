@@ -1,0 +1,6 @@
+{
+    "watch": ["src", ".env"],
+    "ext": "ts",
+    "ignore": ["tests"],
+    "exec": "babel-node src/server.ts --extensions \".ts\""
+}

@@ -3,6 +3,23 @@ var express = require('express');
 var { graphqlHTTP } = require('express-graphql');
 var { buildSchema } = require('graphql');
 
+const { Sequelize } = require('sequelize');
+
+const sequelize = new Sequelize(
+  process.env.DB_NAME || 'database', 
+  process.env.DB_USER || 'username', 
+  process.env.DB_PWD || 'password', 
+  {
+    host: process.env.DB_HOST || 'localhost',
+    dialect: 'mysql'
+  });
+
+try {
+  sequelize.authenticate();
+  console.log('Connection has been established successfully.');
+} catch (error) {
+  console.error('Unable to connect to the database:', error);
+}
 // Construct a schema, using GraphQL schema language
 var schema = buildSchema(`
   type Query {
